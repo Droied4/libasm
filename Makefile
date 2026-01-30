@@ -1,43 +1,34 @@
 NAME = libasm.a 
-NAME_BONUS = ft_traceroute_bonus
 
+CA = nasm 
+AR = ar rcs 
 CC = gcc
 
 OBJS_PATH=./build
 
-FLAGS = -Wall -Werror -Wextra
-DEP_FLAGS = -MMD -MP
-ADR_FLAGS = -fsanitize=address -g
-CFLAGS = $(FLAGS) -I $(IDIR) $(DEP_FLAGS) $(ADR_FLAGS)
+FLAGS = -f elf64
 
-SRC = traceroute.c
-IDIR = ./include 
-HEADER = $(IDIR)/traceroute.h
-OBJ = $(addprefix $(OBJS_PATH)/, ${SRC:.c=.o})
-DEPS = ${OBJ:.o=.d}
+SRC = ft_strlen.s
+HEADER = -I ./libasm.h
+OBJ = $(addprefix $(OBJS_PATH)/, ${SRC:.s=.o})
 
 BONUS = bonus
-BONUS_IDIR = $(BONUS)/include
-BONUS_HEADER = $(BONUS_IDIR)/traceroute_bonus.h
-BONUS_CFLAGS = $(FLAGS) -I $(BONUS_IDIR) $(DEP_FLAGS) 
-BONUS_SCR = $(BONUS)/traceroute_bonus.c
+BONUS_HEADER = -I $(BONUS)/libasm_bonus.h
+BONUS_CFLAGS = $(FLAGS) $(BONUS_HEADER) 
+BONUS_SCR = $(BONUS)/.s
 BONUS_OBJ = $(addprefix $(OBJS_PATH)/, ${BONUS_SCR:.c=.o})
-BONUS_DEPS = ${BONUS_OBJ:.o=.d}
 
 all: $(NAME)
 
--include $(DEPS)
-
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ 
+	$(AR) $(NAME) $(OBJ) 
 
-$(OBJS_PATH)/%.o: %.c Makefile  
+$(OBJS_PATH)/%.o: %.s Makefile  
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CA) $(FLAGS) $< -o $@
 
+#cuando haga el bonus modificar esto
 bonus: $(NAME_BONUS)
-
--include $(BONUS_DEPS)
 
 $(NAME_BONUS): $(BONUS_OBJ)
 	$(CC) $(BONUS_CFLAGS) $^ -o $@
@@ -51,7 +42,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f $(NAME_BONUS)
 
 re: fclean all
 
