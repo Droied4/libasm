@@ -1,4 +1,4 @@
-NAME = ft_traceroute
+NAME = libasm.a 
 NAME_BONUS = ft_traceroute_bonus
 
 CC = gcc
