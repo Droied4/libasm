@@ -12,7 +12,7 @@ OBJS_PATH=./build
 FLAGS = -f elf64
 CFLAGS = -Wall -Werror -Wextra
 
-SRC = ft_strlen.s 
+SRC = ft_strlen.s ft_strcpy.s
 HEADER = -I ./
 OBJ = $(addprefix $(OBJS_PATH)/, ${SRC:.s=.o})
 
