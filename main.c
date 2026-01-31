@@ -23,6 +23,23 @@ static void test_strcpy()
 static void test_strcmp()
 {
 	printf("\n----STRCMP TEST----\n");
+	char s1[5] = "Hola";
+	char s2[5] = "Hola";
+
+	char s1g[5] = "Holz";
+	char s2g[5] = "Hola";
+
+	char s1l[5] = "Hola";
+	char s2l[5] = "Holz";
+
+	printf("value equal -> %i\n", ft_strcmp(s1, s2));
+	printf("[o] value equal -> %i\n", strcmp(s1, s2));
+
+	printf("value great -> %i\n", ft_strcmp(s1g, s2g));
+	printf("[o] value great -> %i\n", strcmp(s1g, s2g));
+
+	printf("value less -> %i\n", ft_strcmp(s1l, s2l));
+	printf("[o] value less -> %i\n", strcmp(s1l, s2l));
 }
 
 int main (void)
