@@ -42,10 +42,18 @@ static void test_strcmp()
 	printf("[o] value less -> %i\n", strcmp(s1l, s2l));
 }
 
+static void test_write()
+{
+	printf("\n----WRITE TEST----\n");
+	ft_write(1, "funciona\n", 10);
+	write(1, "[o]funciona\n", 12);
+}
+
 int main (void)
 {
 	test_strlen();
 	test_strcpy();
 	test_strcmp();
+	test_write();
 	return (0);
 }
