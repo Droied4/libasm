@@ -45,8 +45,30 @@ static void test_strcmp()
 static void test_write()
 {
 	printf("\n----WRITE TEST----\n");
-	ft_write(1, "funciona\n", 10);
-	write(1, "[o]funciona\n", 12);
+	printf("bytes write -> %ld\n", ft_write(1, "funciona\n", 10));
+	printf("[o] bytes write -> %ld\n", write(1, "funciona\n", 10));
+}
+
+static void test_read()
+{
+	int fd = open("./test", O_CREAT);
+	char buf[9];
+	char obuf[9];
+	
+	printf("\n----READ TEST----\n");
+	printf("bytes read -> %ld\n", ft_read(fd, buf, 8));
+	buf[9] = '\0';
+	printf("%s\n", buf);
+	lseek(fd, 0, SEEK_SET);
+	printf("[o] bytes read -> %ld\n", read(fd, obuf, 8));
+	obuf[9] = '\0';
+	printf("%s\n", obuf);
+	close(fd);
+}
+
+static void test_strdup()
+{
+	printf("\n----STRDUP TEST----\n");
 }
 
 int main (void)
@@ -55,5 +77,7 @@ int main (void)
 	test_strcpy();
 	test_strcmp();
 	test_write();
+	test_read();
+	test_strdup();
 	return (0);
 }

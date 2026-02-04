@@ -3,10 +3,9 @@ section .text
 
 ft_write:
 	xor rax, rax
-
-.write
 	mov rax, 1
 	syscall
 
 .done:
+	mov rax, rdx 
  	ret
