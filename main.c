@@ -1,4 +1,6 @@
 #include "libasm.h"
+#include <errno.h>
+#include <stdio.h>
 
 static void test_strlen()
 {
@@ -47,6 +49,17 @@ static void test_write()
 	printf("\n----WRITE TEST----\n");
 	printf("bytes write -> %ld\n", ft_write(1, "funciona\n", 10));
 	printf("[o] bytes write -> %ld\n", write(1, "funciona\n", 10));
+
+	errno = 0;
+	ssize_t n; 
+	n = ft_write(42, "error\n", 6);
+	if (n == -1)
+		perror("ft_write fallo");
+	errno = 0;
+	n = 0;
+	n = write(42, "error\n", 6);
+	if (n == -1)
+		perror("write fallo");
 }
 
 static void test_read()
@@ -64,6 +77,17 @@ static void test_read()
 	obuf[9] = '\0';
 	printf("%s\n", obuf);
 	close(fd);
+	errno = 0;
+	ssize_t n; 
+	n = ft_read(42, buf, 8);
+	if (n == -1)
+		perror("ft_read fallo");
+	errno = 0;
+	n = 0;
+	n = read(42, obuf, 8);
+	if (n == -1)
+		perror("read fallo");
+
 }
 
 static void test_strdup()
