@@ -1,6 +1,4 @@
 #include "libasm.h"
-#include <errno.h>
-#include <stdio.h>
 
 static void test_strlen()
 {
@@ -92,7 +90,20 @@ static void test_read()
 
 static void test_strdup()
 {
+	char *test;
+	char *otest;
+
 	printf("\n----STRDUP TEST----\n");
+	test = ft_strdup("hola");
+	otest = strdup("hola");
+	
+	if (!test)
+	{
+		perror(test);
+		exit(1);
+	}
+	printf("string -> %s address -> %p\n", test, &test);
+	printf("[o] string -> %s address -> %p\n", otest, &otest);
 }
 
 int main (void)
